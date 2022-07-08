@@ -20,11 +20,11 @@ def cadastro(request):
         email = request.POST.get('email')
         confirmar_senha = request.POST.get('confirmar_senha')
         
-        user = User.objects.filter(username=username)
-        # Testa se o usuário já existir
-        if user is not None:
-            messages.add_message(request, constants.WARNING, f"Atenção! usuário {username} já existe!")
-            return redirect('/auth/cadastro')
+    #    ''' user = User.objects.filter(username=username)
+    #      Testa se o usuário já existir
+    #     if user is not None:
+    #         messages.add_message(request, constants.WARNING, f"Atenção! usuário {username} já existe!")
+    #         return redirect('/auth/cadastro')'''
     
     if not password_is_valid(request, senha, confirmar_senha):
         return redirect('/auth/cadastro')
@@ -72,7 +72,7 @@ def sair(request):
 
 def ativar_conta(request, token):
     token = get_object_or_404(Ativacao, token=token)
-    
+    print(token)
     if token.ativo:
         messages.add_message(request, constants.WARNING, 'Essa token já foi usado')
         return redirect('/auth/logar')
